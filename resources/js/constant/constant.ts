@@ -1,0 +1,1 @@
+export const bg_food = 'https://img.freepik.com/free-photo/top-view-fresh-delicious-chinese-food-dark-background_24972-2175.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1709424000&semt=ais';

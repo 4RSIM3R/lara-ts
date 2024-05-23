@@ -1,0 +1,4 @@
+- state of the art
+- research gap
+- research question
+- wos (web of science) jf dan sjr tinggi
