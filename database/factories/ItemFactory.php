@@ -22,7 +22,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->word,
             'slug' => $this->faker->unique()->slug,
             'description' => $this->faker->text,
-            'price' => $this->faker->randomFloat(null, 7500, 100_000), // Random price between 10 and 1000
+            'price' => $this->faker->numberBetween(2, 75) * 1000, // Random price between 10 and 1000
         ];
     }
 }

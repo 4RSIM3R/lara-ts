@@ -2,11 +2,40 @@ import { ItemCard } from '@/components/item-card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AppLayout } from '@/layouts/app-layout';
+import { Category } from '@/types/model/category';
+import { router } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 
+type HomeProps = {
+    categories: Category[],
+    items: Item[],
+    recommendations: Item[]
+}
 
-export default function Home() {
+export default function Home({ categories, items, recommendations }: HomeProps) {
 
+    const [category, setCategory] = useState<any>();
+    const [search, setSearch] = useState<any>();
+    const current = route().current()?.toString;
+
+    useEffect(() => {
+        router.get('', { category_id: category }, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+        });
+
+    }, [category]);
+
+    useEffect(() => {
+        router.get('', { search: search }, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+        });
+
+    }, [search]);
 
 
     return (
@@ -35,24 +64,24 @@ export default function Home() {
             <div className='pt-14 mx-auto max-w-7xl' >
                 <div className='flex flex-col sm:flex-row justify-start sm:justify-between items-center' >
                     <div className='flex space-x-2' >
-                        <Button variant='custom' >
-                            Makanan
-                        </Button>
-                        <Button variant='outline_custom' >
-                            Minuman
-                        </Button>
-                        <Button variant='outline_custom' >
-                            Snack
-                        </Button>
+                        {
+                            categories.map(e => (
+                                <>
+                                    <Button key={e.id} onClick={() => setCategory(e.id)} variant={e.id == category ? 'custom' : 'outline_custom'}  >
+                                        {e.name}
+                                    </Button>
+                                </>)
+                            )
+                        }
                     </div>
                     <div className='w-96' >
-                        <Input placeholder='Cari makanan' />
+                        <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Cari makanan' />
                     </div>
                 </div>
                 <div className='grid grid-cols-12 gap-8 mt-8' >
                     {
-                        Array.from("12345678").map(e => (<>
-                            <ItemCard />
+                        items.map(e => (<>
+                            <ItemCard item={e} />
                         </>))
                     }
                 </div>
@@ -63,8 +92,8 @@ export default function Home() {
                         <p className='text-2xl font-semibold' >Best Seller</p>
                         <div className='grid grid-cols-12 gap-8' >
                             {
-                                Array.from("1234").map(e => (<>
-                                    <ItemCard />
+                                recommendations.map(e => (<>
+                                    <ItemCard item={e} />
                                 </>))
                             }
                         </div>
