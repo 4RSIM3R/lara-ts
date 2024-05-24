@@ -11,4 +11,5 @@ interface Item {
     createdAt: Date;
     updatedAt: Date;
     category?: Category
+    image_url?: string,
 }

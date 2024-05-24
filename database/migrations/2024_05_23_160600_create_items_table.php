@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price');
             $table->json('variant')->nullable(); // ['pedas', 'tidak pedas']
+            $table->text('image_url')->nullable();
             $table->timestamps();
             $table->index(['id', 'slug', 'category_id']);
         });

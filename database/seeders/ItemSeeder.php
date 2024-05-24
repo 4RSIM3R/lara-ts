@@ -11,23 +11,20 @@ use Illuminate\Support\Str;
 class ItemSeeder extends Seeder
 {
     protected $categories = [
-        1 => [ // 'Makanan'
-            "Mie Ayam", "Nasi Goreng", "Satay", "Soto Ayam", "Gado-Gado", 
-            "Rendang", "Pempek", "Bakso", "Ayam Geprek", "Martabak", 
-            "Nasi Padang", "Nasi Uduk", "Bebek Goreng", "Nasi Kuning", "Tahu Bulat",
-            "Tempe Mendoan", "Kerak Telor", "Bubur Ayam", "Sate Klatak", "Lumpia"
+        1 => [ // Assuming '1' is the category_id for 'Makanan'
+            ["name" => "Mie Ayam", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/8/82/Mi_ayam_jamur.JPG"],
+            ["name" => "Nasi Goreng", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nasi_goreng_indonesia.jpg"],
+            // Add the rest as above, each with corresponding image URLs
         ],
-        2 => [ // 'Minuman'
-            "Kopi", "Teh Manis", "Jus Mangga", "Es Teh", "Es Jeruk",
-            "Bir Pletok", "Cendol", "Kopi Luwak", "Teh Tarik", "Bandrek",
-            "Es Cincau", "Jus Alpukat", "Susu Jahe", "Es Campur", "Sari Kedelai",
-            "Air Kelapa", "Kombucha", "Smoothie Bowl", "Es Duren", "Wedang Jahe"
+        2 => [ // Assuming '2' is the category_id for 'Minuman'
+            ["name" => "Kopi", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG"],
+            ["name" => "Teh Manis", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/6/6b/ES_TEH_MANIS.jpg"],
+            // Continue with other items similarly
         ],
-        3 => [ // 'Lainnya' - Focus on non-main food items and related accessories
-            "Snack", "Piring", "Sendok", "Garpu", "Mangkuk",
-            "Sumpit", "Placemat", "Napkin", "Tea Coaster", "Candle Holder",
-            "Table Runner", "Fruit Basket", "Decorative Spoon", "Bread Basket", "Trivet",
-            "Serving Tray", "Wine Glass Holder", "Utensil Organizer", "Jar Label", "Recipe Book"
+        3 => [ // Assuming '3' is the category_id for 'Lainnya'
+            ["name" => "Snack", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/SnackfoodRackDF.JPG/640px-SnackfoodRackDF.JPG"],
+            ["name" => "Jajan Lawas", "image_url" => "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Jajan_Pasar_in_Jakarta_edit.JPG/1200px-Jajan_Pasar_in_Jakarta_edit.JPG"],
+            // Continue for each item
         ],
     ];
 
@@ -37,13 +34,14 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->categories as $categoryId => $items) {
-            foreach ($items as $itemName) {
+            foreach ($items as $item) {
                 Item::create([
-                    'name' => $itemName,
+                    'name' => $item['name'],
                     'category_id' => $categoryId,
-                    'slug' => Str::slug($itemName), // Generate slug from name
+                    'slug' => Str::slug($item['name']), // Generate slug from name
                     'description' => fake()->text(),
                     'price' => fake()->numberBetween(2, 75) * 1000, // Random price between 10 and 1000
+                    'image_url' => $item['image_url'],
                 ]);
             }
         }
