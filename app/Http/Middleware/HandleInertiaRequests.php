@@ -2,8 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Clara\Clara;
-use App\Http\Resources\AuthenticatedUserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -30,7 +28,6 @@ class HandleInertiaRequests extends Middleware
                 ],
             ],
             'csrf_token' => csrf_token(),
-            'hasTermsAndPrivacyPolicyFeature' => Clara::hasTermsAndPrivacyPolicyFeature(),
         ]);
     }
 }

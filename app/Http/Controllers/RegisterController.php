@@ -18,7 +18,6 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-
         try {
             $data = $request->validated();
             $data['password'] = Hash::make($data['password']);

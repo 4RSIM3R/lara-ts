@@ -1,3 +1,5 @@
+import { Category } from "./category";
+
 interface Item {
     id: number;
     categoryId: number; // Assuming Category has an id of type number
@@ -8,4 +10,5 @@ interface Item {
     variant: string[] | null; // Assuming this field stores an array of strings, and can be null
     createdAt: Date;
     updatedAt: Date;
+    category?: Category
 }
