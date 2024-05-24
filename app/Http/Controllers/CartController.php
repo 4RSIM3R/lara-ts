@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
+use App\Models\Cart;
 use App\Service\CartService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class CartController extends Controller
 {
@@ -24,7 +26,7 @@ class CartController extends Controller
             ["user_id", "=", $user]
         ];
 
-        $data = $this->service->all(paginate: true, whereConditions: $where);
+        $data = $this->service->all(paginate: false, whereConditions: $where, relations: ['item']);
 
         return inertia('cart/all', ["data" => $data]);
     }

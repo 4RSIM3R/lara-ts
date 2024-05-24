@@ -46,8 +46,8 @@ export default function ItemDetail({ data }: ItemDetailProps) {
             preserveState: true,
             onSuccess: () => {
                 toast({
-                    title: 'Registrasi Berhasil',
-                    description: 'Silahkan login untuk melakukan transaksi',
+                    title: 'Tambah Item Berhasil',
+                    description: 'Silahkan checkout untuk melanjutkan',
                 });
             },
             onError: (error) => {

@@ -22,7 +22,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 const navigation = [
     { name: 'Home', href: '#' },
     { name: 'Menu', href: '#' },
-    { name: 'Pesanan', href: '#' },
+    { name: 'Pesanan', href: route('cart.index') },
     { name: 'Profile', href: '#' },
 ]
 
@@ -79,12 +79,16 @@ export default function Navbar() {
                                 ) : (
                                     <>
 
-                                        <Button>
-                                            Login
-                                        </Button>
-                                        <Button >
-                                            Register
-                                        </Button>
+                                        <Link href={route('login.index')} >
+                                            <Button variant='custom' >
+                                                Login
+                                            </Button>
+                                        </Link>
+                                        <Link href={route('register.index')} >
+                                            <Button variant='custom' >
+                                                Daftar
+                                            </Button>
+                                        </Link>
                                     </>
                                 )
                             }

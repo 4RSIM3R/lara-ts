@@ -13,6 +13,8 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->count(3)->create();
+        Category::query()->insert(["name" => "Makanan"]);
+        Category::query()->insert(["name" => "Minuman"]);
+        Category::query()->insert(["name" => "Lainnya"]);
     }
 }
